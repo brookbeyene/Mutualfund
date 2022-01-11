@@ -4,7 +4,7 @@ const app = express();
 const routers = require('./routes/stockApiRouter');
 const tickerRouters = require('./routes/stockTickersRouter');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const params = { access_key: '54b1c1a5b9ea427c6d17888d33b619aa' }
 
 app.use(express.json())
