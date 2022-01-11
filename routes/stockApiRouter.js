@@ -5,7 +5,7 @@ const stockApiController = require('../controllers/stockApiController.js')
 const router = require('express').Router();
 
 //add a new stock api to the table
-// router.get('/:thesymbol', stockApiController.addStockApi)
+router.get('/:thesymbol', stockApiController.addStockApi2)
 router.get('/:thesymbol/:theday', stockApiController.addStockApi)
 // router.get('/:thesymbol/:theday1/:theday2', stockApiController.addStockApi)
 //add a new stock api to the table

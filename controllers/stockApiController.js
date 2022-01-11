@@ -129,6 +129,55 @@ const addStockApi = async (req, res) => {
      // send a 200 response with the imported stock
      res.status(200).json(stockApi)
 }
+const addStockApi2 = async (req, res) => {
+    
+    const theDay= req.params.theday;
+    const theSymbol = req.params.thesymbol;
+    const userID = req.params.userid;
+
+    const url = `https://api.marketstack.com/v1/eod?access_key=${process.env.PARAMS}&symbols=${theSymbol}`
+   
+
+    const response = await axios.get(url)
+    const data = response.data['data']
+    // console.log("getAllData",data[0])
+    
+    const stocks = [];
+    if(!data || data.length==0) return stocks;
+    data.forEach(item =>{
+        
+        let input_data = {
+            database: item["database"],
+            // id: Date.now(),
+            // user_ID: userID,
+            stock: item["stock"],
+            open: item["open"], 
+            high: item["high"],
+            low: item["low"],
+            close: item["close"],
+            volume: item["volume"],
+            adj_high: item["adj_high"],
+            adj_low: item["adj_low"],
+            adj_close: item["adj_close"],
+            adj_open: item["adj_open"],
+            adj_volume: item["adj_volume"],
+            split_factor: item["split_factor"],
+            dividend: item["dividend"],
+            symbol: item["symbol"],
+            exchange: item["exchange"],
+            date: item["date"],
+           
+         }
+         stocks.push(input_data)
+
+    })
+    console.log(stocks[1])
+     // using the builtin 'create' function on StockApi Model
+     const stockApi = await StockApi.bulkCreate(stocks)
+     
+     // send a 200 response with the imported stock
+     res.status(200).json(stockApi)
+}
 
 const getAllStockApis = async (req, res) => {
 
@@ -171,6 +220,7 @@ let collected_stock = (array) =>{
     }
 module.exports = {
     addStockApi,
+    addStockApi2,
     getAllStockApis,
     getOneStockApi,
     updateStockApi,
