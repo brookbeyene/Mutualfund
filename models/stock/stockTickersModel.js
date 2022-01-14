@@ -1,4 +1,4 @@
-const { StockTickers } = require(".")
+const { StockTickers } = require("..")
 
 module.exports = (sequelize, DataTypes) => {
 

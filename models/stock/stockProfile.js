@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) =>{
     const StockProfile = sequelize.define("StockProfile",{
          id: { // the id will be our primary key for accessing customer data
@@ -14,10 +13,7 @@ module.exports = (sequelize, DataTypes) =>{
         userId:{
             type: DataType.STRING,
             allowNull: false
-
         }
-    });
-    
-
+    });    
     return StockProfile;
 }

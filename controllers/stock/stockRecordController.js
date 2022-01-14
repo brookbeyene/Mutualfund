@@ -1,4 +1,4 @@
-const db = require('../models/index')
+const db = require('../../models/index')
 const axios = require('axios');
 const { Op } = require("sequelize");
 require('dotenv/config')
@@ -18,8 +18,6 @@ const stockRecordInput = async (req, res) => {
     // console.log("this is the one", stockID)
     const url = `https://api.marketstack.com/v1/eod/${theDay}?access_key=${process.env.PARAMS}&symbols=${theSymbol}`
     
-    
-
     const response = await axios.get(url)
     const data = response.data['data']
 

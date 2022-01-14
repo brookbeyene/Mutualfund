@@ -32,12 +32,13 @@ const db= {}
 //create an attribute storing the previously created sequelize instance
 db.sequelize = sequelize;
 
-db.StockApis = require('./stockApiModel')(sequelize, DataTypes);
+db.StockApis = require('./stock/stockApiModel')(sequelize, DataTypes);
 
-db.StockTickers = require('./stockTickersModel')(sequelize, DataTypes)
-db.Stock = require('./stock')(sequelize, DataTypes)
-db.StockRecord = require('./stockRecord')(sequelize, DataTypes)
-
+db.StockTickers = require('./stock/stockTickersModel')(sequelize, DataTypes)
+db.Stock = require('./stock/stock')(sequelize, DataTypes)
+db.StockRecord = require('./stock/stockRecord')(sequelize, DataTypes)
+db.Etf = require('./etf/etf')(sequelize, DataTypes)
+db.EtfRecord = require('./etf/etfRecord')(sequelize, DataTypes)
 
 // sync the db by running the model
 // "force: false" ensures that the table is not created again every time the program runs
@@ -52,13 +53,7 @@ db.sequelize.sync({ force: false }).then(() => {
 db.Stock.hasMany(db.StockRecord)
 db.StockRecord.belongsTo(db.Stock)
 
-   // Stock.associate = models =>{
-    //     Stock.hasMany(models.StockRecord, {
-    //         onDelete: "cascade"
-    //     })
-    //     Stock.hasMany(models.StockProfile, {
-    //         onDelete: "cascade"
-    //     })
-    // }
+db.Etf.hasMany(db.EtfRecord)
+db.EtfRecord.belongsTo(db.Etf)
 
 module.exports = db;

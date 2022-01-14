@@ -1,5 +1,5 @@
 // the router file contains all the routes that can be accessed
-const stockTickersController = require('../controllers/stockTickersController.js')
+const stockTickersController = require('../../controllers/stock/stockTickersController.js')
 
 // create a Router object from express
 const tickerRouters = require('express').Router();
