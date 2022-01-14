@@ -54,8 +54,7 @@ const addImportApi = async (req, res) => {
    
     let input_data = {
         database: data["database"],
-        id: Date.now(),
-        user_ID: userID,
+ 
         stock: data["stock"],
         open: data["open"], 
         high: data["high"],
@@ -99,8 +98,6 @@ const addStockApi = async (req, res) => {
         
         let input_data = {
             database: item["database"],
-            // id: Date.now(),
-            // user_ID: userID,
             stock: item["stock"],
             open: item["open"], 
             high: item["high"],
@@ -148,8 +145,6 @@ const addStockApi2 = async (req, res) => {
         
         let input_data = {
             database: item["database"],
-            // id: Date.now(),
-            // user_ID: userID,
             stock: item["stock"],
             open: item["open"], 
             high: item["high"],
@@ -171,7 +166,6 @@ const addStockApi2 = async (req, res) => {
          stocks.push(input_data)
 
     })
-    console.log(stocks[1])
      // using the builtin 'create' function on StockApi Model
      const stockApi = await StockApi.bulkCreate(stocks)
      
@@ -179,7 +173,6 @@ const addStockApi2 = async (req, res) => {
      res.status(200).json(stockApi)
 }
 const addStockApi3 = async (req, res) => {
-    
     const theDay1= req.params.theday1;
     const theDay2= req.params.theday2;
     const theSymbol = req.params.thesymbol;
@@ -198,8 +191,7 @@ const addStockApi3 = async (req, res) => {
         
         let input_data = {
             database: item["database"],
-            // id: Date.now(),
-            // user_ID: userID,
+          
             stock: item["stock"],
             open: item["open"], 
             high: item["high"],
@@ -245,6 +237,15 @@ const getOneStockApi = async (req, res) => {
     let stockApi = await StockApi.findOne({where: {id: id}})
     res.status(200).send(stockApi)
 }
+const getOneStockTicker = async (req, res) => {
+    
+    // getting the id from the params in the req
+    let symbol = req.params.symbol
+
+    // using the builtin 'findAll' function on StockApi Model
+    let stockApi = await StockApi.findOne({where: {symbol: symbol}})
+    res.status(200).send(stockApi)
+}
 
 const updateStockApi = async (req, res) => {
     let id = req.params.id
@@ -261,19 +262,14 @@ const deleteStockApi = async (req, res) => {
     await StockApi.destroy({where :{id: id}})
     res.status(200).send(`stockApi with id: ${id} is deleted`)
 }
-let collected_stock = (array) =>{
-        const stocks = [];
-        if(!array || array.length==0) return stocks;
-        array.forEach(item =>{
 
-        })
-    }
 module.exports = {
     addStockApi,
     addStockApi2,
     addStockApi3,
     getAllStockApis,
     getOneStockApi,
+    getOneStockTicker,
     updateStockApi,
     deleteStockApi,
     importApi,

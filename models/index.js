@@ -35,14 +35,30 @@ db.sequelize = sequelize;
 db.StockApis = require('./stockApiModel')(sequelize, DataTypes);
 
 db.StockTickers = require('./stockTickersModel')(sequelize, DataTypes)
+db.Stock = require('./stock')(sequelize, DataTypes)
+db.StockRecord = require('./stockRecord')(sequelize, DataTypes)
+
 
 // sync the db by running the model
 // "force: false" ensures that the table is not created again every time the program runs
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('DB synced with sequelize')
+db.sequelize.sync({ force: false }).then(() => {
+    
+
+        console.log('DB synced with sequelize')
+
 }).catch((error) => {
     console.log('Error syncing the DB to sequelize' + error)
 })
+db.Stock.hasMany(db.StockRecord)
+db.StockRecord.belongsTo(db.Stock)
 
+   // Stock.associate = models =>{
+    //     Stock.hasMany(models.StockRecord, {
+    //         onDelete: "cascade"
+    //     })
+    //     Stock.hasMany(models.StockProfile, {
+    //         onDelete: "cascade"
+    //     })
+    // }
 
 module.exports = db;

@@ -27,12 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         has_eod: {
             type: DataTypes.BOOLEAN,
             allowNull: true
-        },
-        // country: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // },
-        
+        }, 
         stock_exchange_name: {
             type: DataTypes.STRING,
             allowNull: true,
