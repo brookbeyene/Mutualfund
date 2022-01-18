@@ -1,9 +1,10 @@
+require('dotenv/config')
    module.exports = {
-        HOST: 'ec2-52-23-40-80.compute-1.amazonaws.com', // your endpoint
-        USER: 'pukgqswciknutdl', // your username
-        PASSWORD: 'accaf4b88984576967a3a1460adff4b75a40449b0de10a1697b8fdc3949e2d4d', // your password
-        DB: 'd7on4k0je01rg', // your db name
-        dialect: 'postgres',
+        HOST: process.env.HOST, // your endpoint
+        USER: process.env.USER, // your username
+        PASSWORD: process.env.PASSWORD, // your password
+        DB: process.env.DB, // your db name
+        dialect: process.env.DIALECT,
         }
 
 
