@@ -4,7 +4,7 @@ require('dotenv/config')
 
 
 // get the stockApi model
-const StockApi = db.StockTickers
+const StockTickerApiDb = db.StockTickers
 
 
 
@@ -27,8 +27,8 @@ const addStockTickers = async (req, res) => {
         stock_exchange_website:  req.body.stock_exchange_website,
         
      }
-     // using the builtin 'create' function on StockApi Model
-     const stockApi = await StockApi.create(input_data)
+     // using the builtin 'create' function on StockTickerApiDb Model
+     const stockApi = await StockTickerApiDb.create(input_data)
      
      // send a 200 response with the created entry
      res.status(200).send(stockApi)
@@ -66,8 +66,8 @@ const importAllTickers = async (req, res) => {
             stock_ticker.push(input_data)
     })
      
-     // using the builtin 'create' function on StockApi Model
-     const stockApi = await StockApi.bulkCreate(stock_ticker)
+     // using the builtin 'create' function on StockTickerApiDb Model
+     const stockApi = await StockTickerApiDb.bulkCreate(stock_ticker)
      
      // send a 200 response with the imported stock
      res.status(200).json(stockApi)
@@ -75,16 +75,27 @@ const importAllTickers = async (req, res) => {
 
 let getAllStockTickerPost = async (req, res) => {
 
-    // using the builtin 'findAll' function on StockApi Model
-    let stockticker = await StockApi.findAll({})
+    // using the builtin 'findAll' function on StockTickerApiDb Model
+    let stockticker = await StockTickerApiDb.findAll({})
     res.status(200).send(stockticker)
 }
 
+const deleteAllStockPost = async (req, res) => {
+    
+
+    // using the builtin 'destroy' function on StockTickerApiDb Model
+    await StockTickerApiDb.destroy({
+        where: {},
+        truncate: true
+    })
+    res.status(200).send(`All ETF have been deleted`)
+}
 
 module.exports = {
     addStockTickers,
     importAllTickers,
     getAllStockTickerPost,
+    deleteAllStockPost
 }
 
  // country: data["country"],
