@@ -12,7 +12,7 @@ tickerRouters.get('/', stockTickersController.importAllTickers)
 // router.post('/import/:userid/:theday/:thesymbol', stockApiController.addImportApi)
 
 // // access all the stock api in the talbe
-// router.get('/', stockApiController.getAllStockApis)
+tickerRouters.get('/all', stockTickersController.getAllStockTickerPost)
 
 // // access one stock api by id
 // router.get('/:id', stockApiController.getOneStockApi)

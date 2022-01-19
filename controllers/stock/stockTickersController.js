@@ -73,9 +73,18 @@ const importAllTickers = async (req, res) => {
      res.status(200).json(stockApi)
 }
 
+let getAllStockTickerPost = async (req, res) => {
+
+    // using the builtin 'findAll' function on StockApi Model
+    let stockticker = await StockApi.findAll({})
+    res.status(200).send(stockticker)
+}
+
+
 module.exports = {
     addStockTickers,
     importAllTickers,
+    getAllStockTickerPost,
 }
 
  // country: data["country"],
